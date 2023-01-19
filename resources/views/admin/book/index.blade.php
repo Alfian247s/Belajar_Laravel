@@ -1,4 +1,4 @@
-<!doctype html>
+{{-- <!doctype html>
 <html lang="en">
   <head>
     <!-- Required meta tags -->
@@ -53,4 +53,44 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   </body>
-</html>
+</html> --}}
+
+@extends('backend.master')
+
+@section('content')
+  <div class="card card-body">
+    <a href="{{ route("book-create") }}"><button class="btn btn-warning mb-4">Create Data</button></a>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">NO</th>
+          <th scope="col">NAMA</th>
+          <th scope="col">PENULIS</th>
+          <th scope="col">TAHUN</th>
+          <th scope="col">ACTION</th>
+        </tr>
+      </thead>
+      <tbody>
+          @foreach ($book as $key => $item)
+          <tr>
+          <th scope="row">{{ $key + 1 }}</th>
+          <td>{{ $item->name }}</td>
+          <td>{{ $item->author}}</td>
+          <td>{{ $item->year}}</td>
+          <td>
+            <a class="btn btn-primary" href="{{route("book-edit", $item->id)}}">
+              EDIT
+            </a>
+            <form action="{{route('book-delete',$item->id)}}" method="post" style="display:inline" class="form-check-inline">
+              @csrf
+              @method('delete')
+              <button class="btn btn-danger" type="submit">HAPUS</button>
+            </form>
+    
+          </td>
+          </tr>
+        @endforeach
+      </tbody>
+    </table>
+  </div>
+@endsection

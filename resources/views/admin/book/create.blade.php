@@ -1,4 +1,4 @@
-<!doctype html>
+{{-- <!doctype html>
 <html lang="en">
   <head>
     <!-- Required meta tags -->
@@ -69,4 +69,51 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
     -->
   </body>
-</html>
+</html> --}}
+
+@extends('backend.master')
+@section('content')
+<form action="{{route('book-store')}}" method="post">
+  @csrf
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Nama</label>
+    <input name ="name" type="Text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+   
+    @error('name')
+        <span class="text-danger">
+          <strong>
+            {{$message}}
+          </strong> 
+        </span>
+    @enderror
+  </div>
+
+  <div class="mb-3">
+      <label for="penulis" class="form-label">Penulis</label>
+      <input name ="author" type="Text" class="form-control" id="penulis" aria-describedby="emailHelp">
+
+      @error('author')
+        <span class="text-danger">
+          <strong>
+            {{$message}}
+          </strong> 
+        </span>
+    @enderror
+    </div>
+
+    <div class="mb-3">
+      <label for="tahun" class="form-label">Tahun</label>
+      <input name ="year" type="Text" class="form-control" id="tahun" aria-describedby="emailHelp"> 
+
+      @error('year')
+        <span class="text-danger">
+          <strong>
+            {{$message}}
+          </strong> 
+        </span>
+    @enderror
+    </div>
+  
+  <button type="submit" class="b tn btn-primary">Submit</button>
+</form>   
+@endsection
