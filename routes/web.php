@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\Admin\BookController;
+use App\Http\Controllers\HomeController;
 use App\Models\Book;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('backend.master');
+    return view('auth.login');
 });
 
 Route::get('/create',[BookController::class, 'create'])->name("book-create");
@@ -30,3 +32,6 @@ Route::delete('/delete/{id}',[BookController::class,'destroy'])->name("book-dele
 Route::get('/edit/{id}',[BookController::class,'edit'])->name("book-edit");
 
 Route::put('/update/{id}',[BookController::class,'update'])->name("book-update");
+Auth::routes();
+
+Route::get('/home',[HomeController::class,'index'])->name('home');
